@@ -41,8 +41,8 @@ export default {
     methods:{
         addStudents() {
             this.errors = []
-            if(this. newStudentName && this.newStarID) {
-                let student = {name: this.newStarID, starID: this.starID, preent: false}
+            if(this.newStudentName && this.newStarID) {
+                let student = {name: this.newStudentName, starID: this.starID, present: false}
               
                 //todo emit message to parent with new student.
                 

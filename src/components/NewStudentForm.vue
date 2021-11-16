@@ -39,19 +39,27 @@ export default {
        }
     },
     methods:{
-        addStudents() {
+        addStudent() {
             this.errors = []
-            if(this.newStudentName && this.newStarID) {
-                let student = {name: this.newStudentName, starID: this.starID, present: false}
-              
-                //todo emit message to parent with new student.
-                
+
+            if (!this.newStudentName) {
+                this.errors.push('Student name is required')
+            }
+
+            if (!this.newStarID){    
+              this.errors.push('StarID is required')
+            } 
+            
+            if (this.errors.length == 0){                
+                let student = {name: this.newStudentName, starID: this.newStarID, present: false}
+            
+                //emit message to parent with new student.
+                this.$emit('student-added', student)
+
                 this.newStudentName = ''
                 this.newStarID = ''
-            }else {
-                this.errors.push('Name and StarID are required')
-            }
-        },
+            }                          
+        }
     }
 }
 </script>

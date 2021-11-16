@@ -1,8 +1,8 @@
 <template>
  <div id="app">
 
-<new-student-form></new-student-form>
-<student-table></student-table>
+<new-student-form v-on:student-added="newStudentAdded"></new-student-form>
+<student-table v-bind:students="students"></student-table>
 <student-message></student-message>
 
 </div>
@@ -20,7 +20,20 @@ export default {
   components: {
     NewStudentForm,
     StudentMessage,
-    StudentTable,
+    StudentTable
+  },
+  data() {//funtion that returns an object
+    return {
+      students: []
+    }
+  },
+  methods: {
+    newStudentAdded(student) {
+      this.students.push(student)
+      this.students.sort(function(s1, s2) {
+        return s1.name.toLowerCase() < s2.name.toLowerCase() ? -1 : 1
+      })
+    }
   }
 }
 </script>

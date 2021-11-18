@@ -1,13 +1,11 @@
 <template><!-- template/HTML here -->
     <div><!--Start Main DIV -->
         <!--  show a message when student arrives or leaves  -->
-        <div v-if="student.name">
-
-            <div class="alert alert-primary" v-if="student.present">
+        <div v-show="student.name">
+            <div v-if="student.present" class="alert alert-primary">
                 Welcome, {{ student.name }}
             </div>
-
-            <div class="alert alert-secondary" v-else>
+            <div v-else class="alert alert-secondary" >
                 Goodbye, {{ student.name }}. See you later!
             </div>
 

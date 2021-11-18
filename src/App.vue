@@ -1,12 +1,13 @@
 <template>
  <div id="app">
+    <!--method calls and listening or listners for messages or events changes -->
+    <new-student-form v-on:student-added="newStudentAdded"></new-student-form>
+    <student-table v-bind:students="students" 
+      v-on:student-arrived-or-left="studentArrivedOrLeft"
+      v-on:delete-student="studentDeleted"></student-table>
+    <student-message v-bind:student="mostRecentStudent"></student-message>
 
-<new-student-form v-on:student-added="newStudentAdded"></new-student-form>
-<student-table v-bind:students="students" v-on:student-arrived-or-left="studentArrivedOrLeft"></student-table>
-
-<student-message v-bind:student="mostRecentStudent"></student-message>
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -46,11 +47,21 @@ export default {
         }
 
       })
-
+        //updates student list
       if (updateStudent) {
         updateStudent.present = present
         this.mostRecentStudent = updateStudent
       }
+    },
+    studentDeleted(student) { //rename stduentDeleted
+      //filter is used instead of a splice to remove. returns a new array of all studnets for whom the func returns true. 
+      this.students = this.students.filter( function(s) {
+        if(s != student) {
+          return true
+        }
+      })//clear welcom/goobye
+
+      this.mostRecentStudent = {} //empty object.
     }
   }
 }
